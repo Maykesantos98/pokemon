@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicas de Formação — Pokédex do Servidor</title>
+<meta name="description" content="Análise completa do servidor: tier list por pontuação de família, prioridade de shards, times prontos com sinergia e um recomendador interativo — tudo calculado dos dados de cada Pokémon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23fff' stroke='%2320232A' stroke-width='3'/%3E%3Cpath d='M2.3 22a22 22 0 0 1 43.4 0H32a8 8 0 0 0-16 0H2.3Z' fill='%23E3350D' stroke='%2320232A' stroke-width='3'/%3E%3Ccircle cx='24' cy='24' r='7' fill='%23fff' stroke='%2320232A' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="container">
+
+  <nav class="nav">
+    <span class="nav-brand" id="brand"></span>
+    <a href="index.html" class="nav-tab">Shards</a>
+    <a href="items.html" class="nav-tab">Items</a>
+    <a href="dicas.html" class="nav-tab active">Dicas de Formação</a>
+  </nav>
+
+  <header class="dex rise">
+    <div class="dex-top">
+      <div class="lens"></div>
+      <div class="leds"><span class="led r"></span><span class="led y"></span><span class="led g"></span></div>
+      <span class="dex-tagline">TEAM · ANALYZER · v2</span>
+    </div>
+    <div class="dex-screen">
+      <h1><span class="logo-pop">Dicas de Formação</span></h1>
+      <p class="subtitle blink-cursor">Análise dos dados de cada Pokémon pra você gastar shard certo e montar o time mais forte</p>
+    </div>
+  </header>
+
+  <div class="callout" id="callout"></div>
+
+  <!-- 1. ANÁLISE -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">1</span>
+      <div><div class="section-kicker">Raio-X do servidor</div><h2>Análise do Catálogo</h2></div>
+    </div>
+    <p class="section-sub">Como pontuamos: cada <b>linha evolutiva</b> vale a maior estrela que ela alcança, com bônus por chegar a <b>Mega ⚡ (+25)</b> e por ter <b>Z-Awake ✦ (+8)</b>. Esse "poder de linha" guia toda a tier list e a prioridade abaixo.</p>
+    <div class="insights" id="insights"></div>
+  </section>
+
+  <!-- 2. TIER LIST -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">2</span>
+      <div><div class="section-kicker">Ranking</div><h2>Tier List por Poder de Linha</h2></div>
+    </div>
+    <p class="section-sub">Linhas evolutivas ranqueadas pela pontuação de família. Mostramos a forma de destaque de cada linha (Mega ⚡ quando existe). Clica pra copiar o shard.</p>
+    <div id="tiers"></div>
+  </section>
+
+  <!-- 3. PRIORIDADE -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">3</span>
+      <div><div class="section-kicker">Onde investir primeiro</div><h2>Prioridade de Shards</h2></div>
+    </div>
+    <p class="section-sub">As linhas com maior retorno de poder por shard. Um shard evolui a família inteira — então o alvo é o pico que ela desbloqueia.</p>
+    <div class="priority" id="priority"></div>
+  </section>
+
+  <!-- 4. TIMES -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">4</span>
+      <div><div class="section-kicker">Composições</div><h2>Times Prontos</h2></div>
+    </div>
+    <p class="section-sub">Equipes montadas automaticamente, com a sinergia explicada e a composição (quantos Mega/Z e o poder somado). Clica num Pokémon ou em "Copiar time".</p>
+    <div class="teams" id="teams"></div>
+  </section>
+
+  <!-- 5. PROGRESSÃO -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">5</span>
+      <div><div class="section-kicker">Roteiro</div><h2>Guia de Progressão</h2></div>
+    </div>
+    <p class="section-sub">Em que gastar shards em cada fase pra evoluir o time o mais rápido possível.</p>
+    <div class="phases">
+      <div class="phase early">
+        <div class="pico">🌱</div><h3>Início</h3><div class="when">Primeiros dias</div>
+        <ul>
+          <li>Escolha <b>uma linha tier C/B</b> e complete a evolução inteira antes de espalhar shards.</li>
+          <li>Um shard cobre a <b>linha toda</b> — focar 1 linha sai mais barato que 3 pela metade.</li>
+          <li>Como <b>28% das famílias têm Z-Awake ✦</b>, dá pra ter pico de dano cedo sem Mega.</li>
+          <li>Guarde itens Q5+ pra usar quando o time estiver definido.</li>
+        </ul>
+      </div>
+      <div class="phase mid">
+        <div class="pico">⚔️</div><h3>Meio</h3><div class="when">Time formado</div>
+        <ul>
+          <li>Suba <b>uma linha tier A</b> como carry principal.</li>
+          <li>Comece a <b>juntar shards de uma Mega</b> — o bônus de +25 é o maior salto de poder.</li>
+          <li>Use Z-Awake no carry e monte o resto do time em volta dele.</li>
+          <li>Constância &gt; variedade: não troque de carry toda hora.</li>
+        </ul>
+      </div>
+      <div class="phase late">
+        <div class="pico">👑</div><h3>Fim</h3><div class="when">End-game</div>
+        <ul>
+          <li>Invista nas <b>linhas tier S (10★ + Mega)</b> — o teto de poder do servidor.</li>
+          <li>Monte sinergia <b>Mega + Z</b> no mesmo time (ver "Time Meta" acima).</li>
+          <li>1 Mega de pico, 1–2 Z-Awake de suporte, resto cobrindo lacunas.</li>
+          <li>Use o <b>recomendador abaixo</b> pra fechar a composição final.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RECOMENDADOR -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">6</span>
+      <div><div class="section-kicker">Interativo</div><h2>Recomendador de Time</h2></div>
+    </div>
+    <p class="section-sub">Diz o que você quer e a Pokédex monta o time ideal a partir do catálogo.</p>
+    <div class="reco">
+      <div class="reco-controls">
+        <div class="reco-field">
+          <span class="lab">Estrela mínima da linha</span>
+          <select class="select" id="reco-star">
+            <option value="0">Qualquer</option>
+            <option value="2">2★ ou mais</option>
+            <option value="3" selected>3★ ou mais</option>
+            <option value="4">4★ ou mais</option>
+            <option value="10">Só 10★</option>
+          </select>
+        </div>
+        <div class="reco-field">
+          <span class="lab">Estilo</span>
+          <div class="chip-group" id="reco-style">
+            <button class="chip active" data-style="balanced">Equilibrado</button>
+            <button class="chip" data-style="mega">Foco Mega ⚡</button>
+            <button class="chip" data-style="z">Foco Z-Awake ✦</button>
+          </div>
+        </div>
+        <div class="reco-field">
+          <span class="lab">Orçamento (linhas)</span>
+          <select class="select" id="reco-size">
+            <option value="3">Trio (3 shards)</option>
+            <option value="6" selected>Time completo (6 shards)</option>
+          </select>
+        </div>
+        <button class="btn btn-red" id="reco-copy" style="margin-left:auto">📋 Copiar time inteiro</button>
+      </div>
+      <div class="reco-note" id="reco-note"></div>
+      <div class="reco-out" id="reco-out"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span id="foot-ball"></span>Pokédex · Dicas de Formação · análise do catálogo do servidor
+  </footer>
+
+</div>
+
+<script src="assets/js/pokemons-data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  document.getElementById('brand').innerHTML = POKEBALL_SVG + 'Pokédex';
+  document.getElementById('foot-ball').innerHTML = POKEBALL_SVG;
+
+  /* ---------- modelo de famílias ---------- */
+  const DEX = pokemonDex();
+  const wf = DEX.filter(p => p.frag);
+  const ns = p => parseInt(p.star, 10) || 0;
+
+  const famMap = new Map();
+  for (const p of wf) { const k = p.family || p.name_en; if (!famMap.has(k)) famMap.set(k, []); famMap.get(k).push(p); }
+  const FAMILIES = [...famMap.entries()].map(([key, arr]) => {
+    const maxStar = Math.max(...arr.map(ns));
+    const hasMega = arr.some(p => p.mega);
+    const hasZ = arr.some(p => p.z);
+    const fscore = maxStar * 10 + (hasMega ? 25 : 0) + (hasZ ? 8 : 0);
+    const megaForm = arr.filter(p => p.mega).sort((a, b) => ns(b) - ns(a))[0];
+    const head = megaForm || arr.reduce((a, b) => ns(b) > ns(a) ? b : a);
+    return { key, members: arr, maxStar, hasMega, hasZ, fscore, name: head.name_en, name_cn: head.name_cn, frag: head.frag, stages: arr.length };
+  }).sort((a, b) => b.fscore - a.fscore || a.name.localeCompare(b.name));
+
+  const TOTAL = FAMILIES.length;
+  const megaFams = FAMILIES.filter(f => f.hasMega).length;
+  const zFams = FAMILIES.filter(f => f.hasZ).length;
+  const tierOf = f => { const s = f.fscore; return s >= 100 ? 'S' : s >= 55 ? 'A' : s >= 38 ? 'B' : s >= 26 ? 'C' : 'D'; };
+  const tierCount = t => FAMILIES.filter(f => tierOf(f) === t).length;
+  const pct = n => Math.round(n / TOTAL * 100);
+  const icons = f => `${f.hasMega ? ' ⚡' : ''}${f.hasZ ? ' ✦' : ''}`;
+
+  /* ---------- callout ---------- */
+  document.getElementById('callout').innerHTML =
+    `🔎 <b>${tierCount('S')} linhas</b> (${(tierCount('S') / TOTAL * 100).toFixed(1)}%) chegam ao topo <b>10★ + Mega</b> — o investimento mais valioso do servidor. ` +
+    `Já o <b>Z-Awake ✦</b> aparece em <b>${pct(zFams)}%</b> das ${TOTAL} famílias, então dá pra ter pico de dano bem antes de fechar uma Mega.`;
+
+  /* ---------- helpers de barra ---------- */
+  function bars(rows, max) {
+    return `<div class="bars">${rows.map(r => `
+      <div class="bar-row">
+        <span class="k">${r.k}</span>
+        <span class="bar-track"><span class="bar-fill" style="width:${Math.max(4, r.v / max * 100)}%;--bar:${r.color}"></span></span>
+        <span class="v">${r.v}</span>
+      </div>`).join('')}</div>`;
+  }
+
+  /* ---------- 1. INSIGHTS ---------- */
+  (function renderInsights() {
+    const tierRows = [
+      { k: 'S', v: tierCount('S'), color: 'var(--t10)' },
+      { k: 'A', v: tierCount('A'), color: 'var(--t4)' },
+      { k: 'B', v: tierCount('B'), color: 'var(--t3)' },
+      { k: 'C', v: tierCount('C'), color: 'var(--teal)' },
+      { k: 'D', v: tierCount('D'), color: 'var(--t2)' },
+    ];
+    const starCount = s => wf.filter(p => ns(p) === s).length;
+    const starRows = [
+      { k: '10★', v: starCount(10), color: 'var(--t10)' },
+      { k: '4★', v: starCount(4), color: 'var(--t4)' },
+      { k: '3★', v: starCount(3), color: 'var(--t3)' },
+      { k: '2★', v: starCount(2), color: 'var(--t2)' },
+    ];
+    document.getElementById('insights').innerHTML = `
+      <div class="insight">
+        <h3>📊 Linhas por tier</h3>
+        ${bars(tierRows, Math.max(...tierRows.map(r => r.v)))}
+        <div class="cap">${TOTAL} famílias evolutivas com shard no total.</div>
+      </div>
+      <div class="insight">
+        <h3>⚡✦ Capacidades especiais</h3>
+        <div class="lead">${megaFams}<small> / ${TOTAL} linhas com Mega</small></div>
+        ${bars([
+          { k: 'Mega ⚡', v: megaFams, color: 'var(--mega)' },
+          { k: 'Z-Awake ✦', v: zFams, color: 'var(--z)' }
+        ], TOTAL)}
+        <div class="cap">${pct(megaFams)}% megaevoluem · ${pct(zFams)}% têm Z-Awake.</div>
+      </div>
+      <div class="insight">
+        <h3>⭐ Pokémon por estrela</h3>
+        ${bars(starRows, Math.max(...starRows.map(r => r.v)))}
+        <div class="cap">Quanto mais alta a estrela inicial, mais raro — e mais forte a base.</div>
+      </div>`;
+  })();
+
+  /* ---------- 2. TIER LIST ---------- */
+  (function renderTiers() {
+    const meta = {
+      S: { cls: 'tier-s', s: '10★ + Mega', limit: 12 },
+      A: { cls: 'tier-a', s: 'Elite', limit: 16 },
+      B: { cls: 'tier-b', s: 'Forte', limit: 16 },
+      C: { cls: 'tier-c', s: 'Sólido', limit: 14 },
+      D: { cls: 'tier-d', s: 'Base 2★', limit: 0 },
+    };
+    document.getElementById('tiers').innerHTML = ['S', 'A', 'B', 'C', 'D'].map(t => {
+      const mons = FAMILIES.filter(f => tierOf(f) === t);
+      const m = meta[t];
+      const shown = mons.slice(0, m.limit);
+      const rest = mons.length - shown.length;
+      return `
+      <div class="tier">
+        <div class="tier-badge ${m.cls}"><div><div class="t">${t}</div><div class="s">${m.s}</div><div class="c">${mons.length} linhas</div></div></div>
+        <div class="tier-mons">
+          ${shown.map(f => `
+            <button class="mon-pill" data-copy="{${escapeHtml(f.frag)}=100}" data-name="${escapeHtml(f.name)}" title="Copiar shard de ${escapeHtml(f.name)}">
+              <span class="nm">${escapeHtml(f.name)}${icons(f)}</span>
+              <span class="fr">${escapeHtml(f.frag)}</span>
+            </button>`).join('')}
+          ${t === 'D'
+            ? `<span class="tier-rest">${mons.length} linhas base 2★ — boas pra completar o time cedo, mas sem teto alto.</span>`
+            : (rest > 0 ? `<span class="chip-label">+${rest} linhas</span>` : '')}
+        </div>
+      </div>`;
+    }).join('');
+  })();
+
+  /* ---------- 3. PRIORIDADE ---------- */
+  (function renderPriority() {
+    function reason(f) {
+      if (f.hasMega && f.maxStar >= 10) return 'Topo absoluto: 10★ e ainda megaevolui. Compra obrigatória.';
+      if (f.hasMega && f.hasZ) return 'Mega + Z na mesma linha — pico de dano e abertura forte.';
+      if (f.hasMega) return 'Chega a Mega: maior salto de poder por shard.';
+      if (f.hasZ && f.maxStar >= 4) return '4★ com Z-Awake — carry versátil e acessível.';
+      if (f.hasZ) return 'Z-Awake desbloqueia o ataque Z especial.';
+      return 'Linha de base sólida pra firmar o time.';
+    }
+    function unlock(f) {
+      const bits = [];
+      if (f.maxStar) bits.push(`pico ${f.maxStar}★`);
+      if (f.hasMega) bits.push('Mega ⚡');
+      if (f.hasZ) bits.push('Z-Awake ✦');
+      return `→ ${escapeHtml(f.name)} · ${bits.join(' · ')}`;
+    }
+    document.getElementById('priority').innerHTML = FAMILIES.slice(0, 8).map((f, i) => `
+      <div class="prio">
+        <span class="rank">${i + 1}</span>
+        <div class="body">
+          <div class="ttl">${escapeHtml(f.name)} <span style="font-family:var(--font-mono);font-size:12px;color:var(--ink-3)">· shard ${escapeHtml(f.frag)}</span></div>
+          <div class="why">${reason(f)}</div>
+          <div class="unlock">${unlock(f)}</div>
+        </div>
+        <button class="btn btn-copy" style="width:auto" data-copy="{${escapeHtml(f.frag)}=100}" data-name="${escapeHtml(f.name)}">📋</button>
+      </div>`).join('');
+  })();
+
+  /* ---------- 4. TIMES ---------- */
+  function mergeTeam(parts, size) {
+    const seen = new Set(); const out = [];
+    for (const f of parts) { if (seen.has(f.key)) continue; seen.add(f.key); out.push(f); if (out.length === size) break; }
+    return out;
+  }
+  function interleave(a, b) {
+    const out = []; for (let i = 0; i < Math.max(a.length, b.length); i++) { if (a[i]) out.push(a[i]); if (b[i]) out.push(b[i]); } return out;
+  }
+  function teamStats(mons) {
+    const meg = mons.filter(f => f.hasMega).length, z = mons.filter(f => f.hasZ).length;
+    const sum = mons.reduce((s, f) => s + f.fscore, 0);
+    const tags = [];
+    if (meg) tags.push(`${meg} Mega ⚡`);
+    if (z) tags.push(`${z} Z ✦`);
+    tags.push(`Σ poder ${sum}`);
+    return tags;
+  }
+  function teamCard(cfg) {
+    const giftAll = cfg.mons.map(f => `{${f.frag}=100}`).join('');
+    return `
+      <div class="team">
+        <div class="team-head ${cfg.cls}">
+          <div class="tname">${cfg.icon} ${escapeHtml(cfg.name)}</div>
+          <div class="tdesc">${escapeHtml(cfg.desc)}</div>
+        </div>
+        <div class="team-why">${escapeHtml(cfg.why)}</div>
+        <div class="team-stat">${teamStats(cfg.mons).map(t => `<span class="mini-tag">${t}</span>`).join('')}</div>
+        <div class="team-body">
+          ${cfg.mons.map((f, i) => `
+            <div class="team-mon" data-copy="{${escapeHtml(f.frag)}=100}" data-name="${escapeHtml(f.name)}" title="Copiar shard">
+              <span class="num">${String(i + 1).padStart(2, '0')}</span>
+              <span class="nm">${escapeHtml(f.name)}${icons(f)}</span>
+              <span class="fr">${escapeHtml(f.frag)}</span>
+            </div>`).join('')}
+        </div>
+        <div class="team-foot">
+          <button class="btn btn-red" style="width:100%" data-copy="${giftAll}" data-name="${escapeHtml(cfg.name)} (time inteiro)">📋 Copiar time inteiro</button>
+        </div>
+      </div>`;
+  }
+  (function renderTeams() {
+    const megas = FAMILIES.filter(f => f.hasMega).slice(0, 6);
+    const zLegends = FAMILIES.filter(f => f.hasZ && !f.hasMega).slice(0, 6);
+    const starters = FAMILIES.filter(f => f.hasZ && f.maxStar === 3 && !f.hasMega).slice(0, 6);
+    const teams = [
+      { cls: 'legend', icon: '👑', name: 'Time Meta', desc: 'Sinergia Mega + Z.',
+        why: 'Mistura as Megas (abertura explosiva) com lendários Z (dano sustentado) — cobre os dois tempos do round.',
+        mons: mergeTeam(interleave(megas, zLegends), 6) },
+      { cls: 'mega', icon: '⚡', name: 'Time Mega', desc: 'Só quem megaevolui.',
+        why: 'Maior pico de dano do servidor. Exige mais shards, mas o teto é o mais alto que existe.',
+        mons: megas },
+      { cls: 'z', icon: '✦', name: 'Time Z-Awake', desc: 'Lendários com ataque Z.',
+        why: 'Alto teto sem depender de Mega: cada Z-Awake entrega um golpe decisivo por round.',
+        mons: zLegends },
+      { cls: 'starter', icon: '🌱', name: 'Time Iniciante', desc: 'Forte e barato.',
+        why: 'Linhas 3★ com Z-Awake: evoluem rápido, custam pouco e seguram bem o early/mid game.',
+        mons: starters },
+    ];
+    document.getElementById('teams').innerHTML = teams.map(teamCard).join('');
+  })();
+
+  /* ---------- 6. RECOMENDADOR ---------- */
+  let recoStyle = 'balanced';
+  function renderReco() {
+    const minStar = parseInt(document.getElementById('reco-star').value, 10);
+    const size = parseInt(document.getElementById('reco-size').value, 10);
+    let pool = FAMILIES.filter(f => minStar === 10 ? f.maxStar === 10 : f.maxStar >= minStar);
+    if (recoStyle === 'mega') pool = pool.filter(f => f.hasMega);
+    if (recoStyle === 'z') pool = pool.filter(f => f.hasZ);
+    const team = pool.slice(0, size);
+    const out = document.getElementById('reco-out');
+    const note = document.getElementById('reco-note');
+    if (!team.length) {
+      note.innerHTML = '';
+      out.innerHTML = `<div class="reco-empty">Nenhuma linha bate com esses filtros 😅<br>relaxa a estrela mínima ou troca o estilo.</div>`;
+      return;
+    }
+    const stats = teamStats(team);
+    const styleLabel = { balanced: 'equilibrado', mega: 'foco Mega ⚡', z: 'foco Z-Awake ✦' }[recoStyle];
+    note.innerHTML = `Time <b>${styleLabel}</b> de <b>${team.length} ${team.length === 1 ? 'linha' : 'linhas'}</b> · ${stats.join(' · ')}. Ordenado pela pontuação de família — copia abaixo e cola no gift.csv.`;
+    out.innerHTML = team.map(f => `
+      <div class="reco-mon" data-copy="{${escapeHtml(f.frag)}=100}" data-name="${escapeHtml(f.name)}" title="Copiar shard" style="cursor:pointer">
+        <div class="nm">${escapeHtml(f.name)}</div>
+        <div class="cn">${escapeHtml(f.name_cn || '')}</div>
+        <div class="row">
+          <span class="star-pill" style="--strip:${starColor(String(f.maxStar))};font-size:11px">★ ${f.maxStar}</span>
+          <span class="fr">${escapeHtml(f.frag)}</span>
+        </div>
+        <div class="tags" style="margin-top:6px">
+          ${f.hasMega ? '<span class="tag tag-mega">⚡ Mega</span>' : ''}
+          ${f.hasZ ? '<span class="tag tag-z">✦ Z</span>' : ''}
+        </div>
+      </div>`).join('');
+    out.dataset.gift = team.map(f => `{${f.frag}=100}`).join('');
+  }
+  document.getElementById('reco-star').addEventListener('change', renderReco);
+  document.getElementById('reco-size').addEventListener('change', renderReco);
+  document.querySelectorAll('#reco-style .chip').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#reco-style .chip').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); recoStyle = b.dataset.style; renderReco();
+  }));
+  document.getElementById('reco-copy').addEventListener('click', () => {
+    const gift = document.getElementById('reco-out').dataset.gift;
+    if (gift) copyGift(gift, 'time recomendado');
+  });
+
+  /* delegated copy */
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-copy]');
+    if (!el || el.id === 'reco-copy') return;
+    copyGift(el.dataset.copy, el.dataset.name);
+    if (el.classList.contains('btn-copy')) {
+      const orig = el.innerHTML; el.classList.add('copied');
+      setTimeout(() => { el.innerHTML = orig; el.classList.remove('copied'); }, 1400);
+    }
+  });
+
+  renderReco();
+</script>
+</body>
+</html>

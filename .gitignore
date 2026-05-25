@@ -1,0 +1,10 @@
+# screenshots de verificação local
+.shots/
+
+# temporários
+._check_*
+*.tmp
+
+# OS
+Thumbs.db
+.DS_Store
